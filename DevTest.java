@@ -110,4 +110,31 @@ public class DevTest
         }while(!done);
         return value;
     }
+
+    public static double getRangedDouble(Scanner pipe, String prompt, double low, double high)
+    {
+        boolean done = false;
+        String trash = "";
+        double dvalue = 0;
+        do {
+            System.out.println(prompt + ": ");
+            if(pipe.hasNextDouble())
+            {
+                dvalue = pipe.nextDouble();
+                pipe.nextLine();
+                if(dvalue >= low && value <= high)
+                {
+                done = true;
+                } else {
+                    System.out.println("You must enter a value within the range [" + low + " - " + high + "]: " + dvalue);
+                }
+            }
+            else{
+                trash = pipe.nextLine();
+                System.out.println("\nYou must enter a number!\n");
+            }
+        }while(!done);
+        
+        return dvalue;
+    }
 }
