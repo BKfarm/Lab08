@@ -14,6 +14,9 @@ public class DevTest
         System.out.println("Salary: " + salary);
         int favnum = getRangedInt(testScan, "Enter your favorite number [1-10]", 1, 10);
         System.out.println("Number: ");
+        String ssnRegEx = "\\d{3}-\\d{2}-\\d{4}$";
+        String ssn = getRegExString(testScan, "Enter your SSN", ssnRegEx);
+        System.out.println("Your ssn is: " + ssn);
 
     }
     /* returns a String input by the user that must be at least one character */
@@ -136,5 +139,49 @@ public class DevTest
         }while(!done);
         
         return dvalue;
+    }
+    /**
+     * Returns a True/False value for yes or no input
+     * @param pipe
+     * @param prompt
+     * @return
+     */
+    public static boolean getYNConfirm(Scanner pipe, String prompt)
+    {
+        boolean done = false;
+        boolean retVal = false;
+        String response = "";
+        do {
+            System.out.println(prompt + ": ");
+            response = pipe.nextLine();
+
+            if(response.toUpperCase().matches("[YN]]"))
+            {    done = true;
+                if(response.equalsIgnoreCase("Y"))
+                    retVal = true;
+                else
+                    retVal = false;
+
+            }
+            else
+                System.out.println("\nYou must enter a [y/n]!\n");
+        }while(!done);
+        return response;
+    }
+
+    public static String getRegExString(Scanner pipe, String prompt, String regEx)
+    {
+        boolean done = false;
+        String response = "";
+        do {
+            System.out.println(prompt + " " + regEx + ": ");
+            response = pipe.nextLine();
+
+            if(response.matches(regEx))
+                done = true;
+            else
+                System.out.println("\nYou must enter a string that matches the pattern:" + regEx);
+        }while(!done);
+        return response;
     }
 }

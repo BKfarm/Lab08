@@ -1,11 +1,12 @@
  import java.util.Scanner;
- 
+public class SafeInput{
+
 /* returns a String input by the user that must be at least one character */
     public static String getNonZeroLenString(Scanner pipe, String prompt)
     {
         boolean done = false;
         String response = "";
-        do {
+        do{
             System.out.println(prompt + ": ");
             response = pipe.nextLine();
 
@@ -120,3 +121,48 @@
         
         return dvalue;
     }
+    /**
+     * Returns a True/False value for yes or no input
+     * @param pipe
+     * @param prompt
+     * @return
+     */
+    public static boolean getYNConfirm(Scanner pipe, String prompt)
+    {
+        boolean done = false;
+        boolean retVal = false;
+        String response = "";
+        do {
+            System.out.println(prompt + ": ");
+            response = pipe.nextLine();
+
+            if(response.toUpperCase().matches("[YN]]"))
+            {    done = true;
+                if(response.equalsIgnoreCase("Y"))
+                    retVal = true;
+                else
+                    retVal = false;
+
+            }
+            else
+                System.out.println("\nYou must enter a [y/n]!\n");
+        }while(!done);
+        return response;
+    }
+
+    public static String getRegExString(Scanner pipe, String prompt, String regEx)
+    {
+        boolean done = false;
+        String response = "";
+        do {
+            System.out.println(prompt + " " + regEx + ": ");
+            response = pipe.nextLine();
+
+            if(response.matches(regEx))
+                done = true;
+            else
+                System.out.println("\nYou must enter a string that matches the pattern:" + regEx);
+        }while(!done);
+        return response;
+    }
+}
