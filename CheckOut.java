@@ -8,8 +8,9 @@ public class CheckOut
         double totalCost = 0.0;
         boolean done = false;
         do{
-        totalCost = SafeInput.getRangedDouble(in, "Enter the price of your item.", .50, 10);
+        totalCost += SafeInput.getRangedDouble(in, "Enter the price of your item", .50, 10);
         done = SafeInput.getYNConfirm(in, "Continue? [Y/N]");
-        }while(!done)
+        }while(done);
+        System.out.println("Total cost: " + totalCost);
     }
 }

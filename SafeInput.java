@@ -106,7 +106,7 @@ public class SafeInput{
             {
                 dvalue = pipe.nextDouble();
                 pipe.nextLine();
-                if(dvalue >= low && value <= high)
+                if(dvalue >= low && dvalue <= high)
                 {
                 done = true;
                 } else {
@@ -136,7 +136,7 @@ public class SafeInput{
             System.out.println(prompt + ": ");
             response = pipe.nextLine();
 
-            if(response.toUpperCase().matches("[YN]]"))
+            if(response.toUpperCase().matches("[YN]"))
             {    done = true;
                 if(response.equalsIgnoreCase("Y"))
                     retVal = true;
@@ -147,7 +147,7 @@ public class SafeInput{
             else
                 System.out.println("\nYou must enter a [y/n]!\n");
         }while(!done);
-        return response;
+        return retVal;
     }
 
     public static String getRegExString(Scanner pipe, String prompt, String regEx)
@@ -164,5 +164,42 @@ public class SafeInput{
                 System.out.println("\nYou must enter a string that matches the pattern:" + regEx);
         }while(!done);
         return response;
+    }
+    public static void prettyHeader(Scanner pipe, String prompt)
+    {
+        boolean done = false;
+        String response = "";
+        do{
+            System.out.println(prompt + ": ");
+            response = pipe.nextLine();
+
+            if((response.length() > 0) || (response.length() < 27))
+                done = true;
+            else
+                System.out.println("\nYou must enter at least one character!\n");
+        }while(!done);
+        for(int x = 0; x < 60; x++)
+        {
+            System.out.print("*");
+        }
+        System.out.println();
+        System.out.print("***");
+
+        for(int x = 0; x < (27 - (response.length() / 2)); x++)
+        {
+            System.out.print(" ");
+        }
+        System.out.print(response);
+        for(int x = 0; x < (27 - (response.length() / 2)); x++)
+        {
+            System.out.print(" ");
+        }
+        System.out.print("***");
+        System.out.println();
+        for(int x = 0; x < 60; x++)
+        {
+            System.out.print("*");
+        }
+
     }
 }
